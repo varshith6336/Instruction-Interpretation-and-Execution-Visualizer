@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Instruction Interpretation and Execution Visualizer</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Instruction Interpretation and Execution Visualizer</h1>
+  <p>Visualizing how a CPU fetches, decodes and executes simple machine instructions</p>
+</header>
+<main>
+
+  <div class="row2">
+    <section class="card">
+      <h2>1. Program (Assembly)</h2>
+      <textarea id="src" spellcheck="false"></textarea>
+      <p class="hint">Mnemonics: HLT, LDA, STA, ADD, SUB, AND, OR, JMP, LDI, JZ &nbsp;|&nbsp; <code>DATA addr value</code> sets memory. Instructions load from address 0.</p>
+      <div class="btns"><button id="asm">Assemble &amp; Load</button><button class="alt" id="sample">Reload Sample</button></div>
+      <div class="msg" id="asmMsg"></div>
+    </section>
+
+    <section class="card">
+      <h2>2. Instruction Interpreter</h2>
+      <input type="text" id="one" value="ADD 14" spellcheck="false" placeholder="e.g. ADD 14 or 00111110">
+      <div class="btns"><button id="interp">Interpret Instruction</button></div>
+      <div class="msg" id="oneMsg"></div>
+      <div id="oneOut"></div>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>3. CPU Registers</h2>
+    <div class="regs">
+      <div class="reg" id="r-PC"><b>PC (4-bit)</b><div class="bin"></div><div class="dec"></div></div>
+      <div class="reg" id="r-MAR"><b>MAR (4-bit)</b><div class="bin"></div><div class="dec"></div></div>
+      <div class="reg" id="r-MDR"><b>MDR (8-bit)</b><div class="bin"></div><div class="dec"></div></div>
+      <div class="reg" id="r-IR"><b>IR (8-bit)</b><div class="bin"></div><div class="dec"></div></div>
+      <div class="reg" id="r-AC"><b>AC (8-bit)</b><div class="bin"></div><div class="dec"></div></div>
+      <div class="reg" id="r-Z"><b>Z flag</b><div class="bin"></div><div class="dec"></div></div>
+    </div>
+  </section>
+
+  <div class="row2">
+    <section class="card">
+      <h2>4. Execution Control</h2>
+      <div class="phase"><div class="ph" id="p-Fetch">FETCH</div><div class="ph" id="p-Decode">DECODE</div><div class="ph" id="p-Execute">EXECUTE</div></div>
+      <div class="sigs" id="sigs"></div>
+      <div class="btns" style="margin-top:0">
+        <button id="step">Step (1 micro-operation)</button>
+        <button id="inst">Run Instruction</button>
+        <button id="all">Run All</button>
+        <button class="alt" id="reset">Reset</button>
+      </div>
+      <div class="stats" id="stats"></div>
+      <h2 style="margin-top:14px">Decoded Instruction (current IR)</h2>
+      <div id="decOut"></div>
+    </section>
+
+    <section class="card">
+      <h2>5. Memory (16 × 8-bit)</h2>
+      <table>
+        <thead><tr><th>Addr</th><th>Contents</th><th>Dec</th><th>As instruction</th></tr></thead>
+        <tbody id="mem"></tbody>
+      </table>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>6. Micro-Operation Log</h2>
+    <div class="log" id="log"></div>
+  </section>
+</main>
+<footer>Computer Organization and Architecture – Assignment II</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
